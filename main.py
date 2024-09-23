@@ -1,6 +1,7 @@
 import pandas as pd
 import csv 
 from datetime import datetime
+from info_gather import get_date, get_member_name, get_book_name, get_genre, get_rating, get_would_recommend
 import matplotlib.pyplot as plt
 
 class BOTM:
@@ -31,5 +32,14 @@ class BOTM:
             writer.writerow(new_entry)
         print("Entry successfully added")
 
-BOTM.init_botm()
-BOTM.add_review("09-09-2024", "Shay", "Rendezvous with Rama", "Sci-Fi", 5, "Yes")
+def add_entry_interface():
+    BOTM.init_botm()
+    date = get_date("Enter the date of the book club meeting in the format dd-mm-yyy, or press enter for today's date: ", allow_default= True)
+    member_name = get_member_name()
+    book_name = get_book_name()
+    genre = get_genre()
+    rating = get_rating()
+    would_recommend = get_would_recommend()
+    BOTM.add_review(date, member_name, book_name, genre, rating, would_recommend)
+
+add_entry_interface()
