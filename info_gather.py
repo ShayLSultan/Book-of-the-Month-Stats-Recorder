@@ -2,6 +2,7 @@ from datetime import datetime
 
 date_format = "%d-%m-%Y"
 options = {"Y": "Yes", "N": "No"}
+genres = {"F": "Fantasy", "S": "Sci-Fi", "C": "Contemporary", "Cl": "Classic", "O": "Other"}
 
 def get_date(prompt, allow_default = False):
     date_string = input(prompt)
@@ -21,17 +22,22 @@ def get_book_name():
     return input("Enter book name ")
 
 def get_genre():
-    return input("Enter the genre that you would describe this book as ")
+    genre = input(" What genre is this book? Type 'F for fantasy, 'S' for Sci-Fi, 'C' for Contemporary, 'Cl' for Classic, or 'O' for Other ")
+    if genre in genres:
+        return genres[genre]
+    else:
+        print("Invalid response, please type 'F for fantasy, 'S' for Sci-Fi, 'C' for Contemporary, 'Cl' for Classic, or 'O' for Other ")
+        return get_genre()
 
 def get_rating():
     try:
-        amount = float(input("Enter your rating out of 10 for this book e.g. '9' "))
-        if amount <= 0:
+        rating = float(input("Enter your rating out of 10 for this book e.g. '9' "))
+        if rating <= 0:
             raise ValueError("Your rating must be greater than zero ")
-        return amount
+        return rating
     except ValueError as e:
         print(e)
-        return get_amount()
+        return get_rating()
 
 def get_would_recommend():
     y_n = input("Would you recommend this book? Type 'Y' for Yes or 'N' for No ").upper()
